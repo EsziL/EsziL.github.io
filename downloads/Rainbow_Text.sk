@@ -1,0 +1,148 @@
+#This code was made by Eszi
+#
+#Discord: Balint#2438
+#Minecraft: Eszi
+#
+#
+
+
+# LeftRGB is to replace the default white on the left side of the screen on color pickers, with this enabled the right side fades into something else.
+# This is purely for fun, and I think that there's almost no use for it.
+#
+# WARNING: When using shiftClickToPasteInChat, make sure to send the formatted return value to the player!
+function colorPickerVisualiser(color: text, width: int, height: int, shiftClickToPasteInChat: boolean = false, leftRGB: numbers = 255 and 255 and 255) :: texts:
+	{_width} <= 150
+	{_height} <= 150
+	loop {_leftRGB::*}:
+		set {_leftRGB::%loop-index%} to round(loop-value)
+	set {_rgb::*} to HexToRGB({_color})
+	loop {_width} times:
+		add formatted RGBToHex(round(abs(distribute({_rgb::1}, {_leftRGB::1}, loop-value, {_width}))), round(abs(distribute({_rgb::2}, {_leftRGB::2}, loop-value, {_width}))), round(abs(distribute({_rgb::3}, {_leftRGB::3}, loop-value, {_width})))) to {_rmain::*}
+	loop {_height}-1 times:
+		loop {_width} times:
+			set {_rgb::*} to HexToRGB({_rmain::%loop-value-2%})
+			add formatted RGBToHex(round(abs(distribute({_rgb::1}, 0, loop-value-1, {_height}))), round(abs(distribute({_rgb::2}, 0, loop-value-1, {_height}))), round(abs(distribute({_rgb::3}, 0, loop-value-1, {_height})))) to {_r::%loop-value-1%::*}
+	loop {_rmain::*}:
+		if {_shiftClickToPasteInChat} = false:
+			set {_} to join formatted "<##%loop-value%>⬛" and {_}
+		else:
+			set {_} to join formatted "<ins:##%loop-value%><ttp:<##%loop-value%>##%loop-value%%nl%%nl%&7SHIFT+Click to paste in chat.><##%loop-value%>⬛" and {_}
+	add {_} to {_return::*}
+	clear {_}
+	loop {_height}-1 times:
+		loop {_r::%loop-value%::*}:
+			if {_shiftClickToPasteInChat} = false:
+				set {_} to join formatted "<##%loop-value-2%>⬛" and formatted {_}
+			else:
+				set {_} to join formatted "<ins:##%loop-value-2%><ttp:<##%loop-value-2%>##%loop-value-2%%nl%%nl%&7SHIFT+Click to paste in chat.><##%loop-value-2%>⬛" and formatted {_}
+		add formatted {_} to {_return::*}
+		clear {_}
+
+	return {_return::*}
+
+# WARNING: When using shiftClickToPasteInChat, make sure to send the formatted return value to the player!
+# WARNING: The wdith is only approximate, and 2 different inputs could result in the same text!
+function colorPickerLineVisualiser(width: int, shiftClickToPasteInChat: boolean = false) :: text:
+	{_width} <= 150
+	if {_shiftClickToPasteInChat} = false:
+		set {_r} to join {_r} and formatted "<##%RGBToHex(255, 0, 0)%>⬛"
+	else:
+		set {_r} to join {_r} and formatted "<ins:##%RGBToHex(255, 0, 0)%><ttp:<##%RGBToHex(255, 0, 0)%>##%RGBToHex(255, 0, 0)%%nl%%nl%&7SHIFT+Click to paste in chat><##%RGBToHex(255, 0, 0)%>⬛"
+	loop round({_width} / 6) times:
+		if {_shiftClickToPasteInChat} = false:
+			set {_r} to join {_r} and formatted "<##%RGBToHex(255, round(abs(distribute(0, 255, loop-value, round({_width} / 6)))), 0)%>⬛"
+		else:
+			set {_r} to join {_r} and formatted "<ins:##%RGBToHex(255, round(abs(distribute(0, 255, loop-value, round({_width} / 6)))), 0)%><ttp:<##%RGBToHex(255, round(abs(distribute(0, 255, loop-value, round({_width} / 6)))), 0)%>##%RGBToHex(255, round(abs(distribute(0, 255, loop-value, round({_width} / 6)))), 0)%%nl%%nl%&7SHIFT+Click to paste in chat.><##%RGBToHex(255, round(abs(distribute(0, 255, loop-value, round({_width} / 6)))), 0)%>⬛"
+	loop round({_width} / 6) times:
+		if {_shiftClickToPasteInChat} = false:
+			set {_r} to join {_r} and formatted "<##%RGBToHex(round(abs(distribute(255, 0, loop-value, round({_width} / 6)))), 255, 0)%>⬛"
+		else:
+			set {_r} to join {_r} and formatted "<ins:##%RGBToHex(round(abs(distribute(255, 0, loop-value, round({_width} / 6)))), 255, 0)%><ttp:<##%RGBToHex(round(abs(distribute(255, 0, loop-value, round({_width} / 6)))), 255, 0)%>##%RGBToHex(round(abs(distribute(255, 0, loop-value, round({_width} / 6)))), 255, 0)%%nl%%nl%&7SHIFT+Click to paste in chat.><##%RGBToHex(round(abs(distribute(255, 0, loop-value, round({_width} / 6)))), 255, 0)%>⬛"
+	loop round({_width} / 6) times:
+		if {_shiftClickToPasteInChat} = false:
+			set {_r} to join {_r} and formatted "<##%RGBToHex(0, 255, round(abs(distribute(0, 255, loop-value, round({_width} / 6)))))%>⬛"
+		else:
+			set {_r} to join {_r} and formatted "<ins:##%RGBToHex(0, 255, round(abs(distribute(0, 255, loop-value, round({_width} / 6)))))%><ttp:<##%RGBToHex(0, 255, round(abs(distribute(0, 255, loop-value, round({_width} / 6)))))%>##%RGBToHex(0, 255, round(abs(distribute(0, 255, loop-value, round({_width} / 6)))))%%nl%%nl%&7SHIFT+Click to paste in chat.><##%RGBToHex(0, 255, round(abs(distribute(0, 255, loop-value, round({_width} / 6)))))%>⬛"
+	loop round({_width} / 6) times:
+		if {_shiftClickToPasteInChat} = false:
+			set {_r} to join {_r} and formatted "<##%RGBToHex(0, round(abs(distribute(255, 0, loop-value, round({_width} / 6)))), 255)%>⬛"
+		else:
+			set {_r} to join {_r} and formatted "<ins:##%RGBToHex(0, round(abs(distribute(255, 0, loop-value, round({_width} / 6)))), 255)%><ttp:<##%RGBToHex(0, round(abs(distribute(255, 0, loop-value, round({_width} / 6)))), 255)%>##%RGBToHex(0, round(abs(distribute(255, 0, loop-value, round({_width} / 6)))), 255)%%nl%%nl%&7SHIFT+Click to paste in chat.><##%RGBToHex(0, round(abs(distribute(255, 0, loop-value, round({_width} / 6)))), 255)%>⬛"
+	loop round({_width} / 6) times:
+		if {_shiftClickToPasteInChat} = false:
+			set {_r} to join {_r} and formatted "<##%RGBToHex(round(abs(distribute(0, 255, loop-value, round({_width} / 6)))), 0, 255)%>⬛"
+		else:
+			set {_r} to join {_r} and formatted "<ins:##%RGBToHex(round(abs(distribute(0, 255, loop-value, round({_width} / 6)))), 0, 255)%><ttp:<##%RGBToHex(round(abs(distribute(0, 255, loop-value, round({_width} / 6)))), 0, 255)%>##%RGBToHex(round(abs(distribute(0, 255, loop-value, round({_width} / 6)))), 0, 255)%%nl%%nl%&7SHIFT+Click to paste in chat.><##%RGBToHex(round(abs(distribute(0, 255, loop-value, round({_width} / 6)))), 0, 255)%>⬛"
+	loop round({_width} / 6) times:
+		if {_shiftClickToPasteInChat} = false:
+			set {_r} to join {_r} and formatted "<##%RGBToHex(round(abs(distribute(0, 255, loop-value, round({_width} / 6)))), 0, 255)%>⬛"
+		else:
+			set {_r} to join {_r} and formatted "<ins:##%RGBToHex(255, 0, round(abs(distribute(255, 0, loop-value, round({_width} / 6)))))%><ttp:<##%RGBToHex(255, 0, round(abs(distribute(255, 0, loop-value, round({_width} / 6)))))%>##%RGBToHex(255, 0, round(abs(distribute(255, 0, loop-value, round({_width} / 6)))))%%nl%%nl%&7SHIFT+Click to paste in chat.><##%RGBToHex(255, 0, round(abs(distribute(255, 0, loop-value, round({_width} / 6)))))%>⬛"
+	return {_r}
+
+function gradient(h: texts, input: text) :: text:
+	if size of {_h::*} > 1:
+		set {_loop} to ceil(length of {_input} / size of {_h::*})
+		loop size of {_h::*} -1 times:
+			clear {_c::*}
+			set {_c1::*} to HexToRGB({_h::%loop-value%})
+			set {_c2::*} to HexToRGB({_h::%loop-value +1%})
+
+			add ((length of {_input} - ({_loop} * (size of {_h::*} -1)))/(size of {_h::*} -1)) to {_fix}
+			set {_l} to {_loop}+({_fix} if {_fix} >= 1 else 0)
+			loop round({_l}) times:
+				add 1 to {_}
+				set {_color} to RGBToHex(round(abs(distribute({_c1::1}, {_c2::1}, loop-value-2, round({_l})))), round(abs(distribute({_c1::2}, {_c2::2}, loop-value-2, round({_l})))), round(abs(distribute({_c1::3}, {_c2::3}, loop-value-2, round({_l})))))
+				set {_color} to "412eff" if {_color} = "402DFF"
+				set {_r} to join {_r} and formatted "<##%{_color}%>%subtext of {_input} from characters {_} to {_} ? ""%"
+			remove 1 from {_fix} if {_fix} >= 1
+	else:
+		set {_r} to formatted "<##%RGBToHex(HexToRGB({_h::1}))%>%{_input}%"
+
+	return {_r}
+function rainbow(input: text, brightness: num = 1, wrapAmount: int = 1) :: text:
+	set {_rcolors::*} to "ff00000" and "ff7f00" and "ffff00" and "00ff00" and "0000ff" and "5555FF" and "9900ff"
+	loop {_wrapAmount}-1 times:
+		add "ff00000" and "ff7f00" and "ffff00" and "00ff00" and "0000ff" and "5555FF" and "9900ff" to {_rcolors::*}
+	loop size of {_rcolors::*} times:
+		set {_r%loop-value%::*} to HexToRGB({_rcolors::%loop-value%})
+		loop {_r%loop-value%::*}:
+			set {_} to {_r%loop-value-1%::%loop-index%} - (255 * (1-{_brightness})) if {_r%loop-value-1%::%loop-index%} - (255 * (1-{_brightness})) < 255 else 255
+			set {_} to 0 if {_} < 0 else {_}
+			set {_r%loop-value-1%::%loop-index%} to {_}
+		set {_r::%loop-value%} to RGBToHex({_r%loop-value%::*})
+	return gradient({_r::*}, {_input})
+function RGBToHex(number: numbers) :: string:
+	loop {_number::*}:
+		set {_r} to join {_r} and (character at (floor(loop-value / 16)+1) in "0123456789ABCDEF") and (character at ((loop-value) - ((floor(loop-value / 16))*16))+1 in "0123456789ABCDEF")
+	return {_r}
+function HexToRGB(text: text) :: numbers:
+	replace all "##" in {_text} with ""
+	loop 3 times:
+		set {_t1} to upper case character at loop-value + ((loop-value)-1) in {_text}
+		set {_t2} to upper case character at loop-value *2 in {_text}
+
+		loop 2 times:
+			loop 16 times:
+				if {_t%loop-value-2%} = character at loop-value-3 in "0123456789ABCDEF":
+					set {_temp%loop-value-2%} to loop-value-3 -1
+					stop 1 loop
+		set {_r%loop-value%} to {_temp1}*16 + {_temp2}
+	return {_r1} and {_r2} and {_r3}
+function distributeList(from: num, to: num, input: nums) :: nums:
+	loop {_input::*}:
+		add {_from}+(((({_to}-{_from})/(size of {_input::*}))*((loop-value)-1))+(((({_to}-{_from})/(size of {_input::*}))*((loop-value)-1))/size of {_input::*})) to {_r::*}
+	set {_r::%{_size}%} to {_to}
+	return {_r::*}
+
+function distribute(from: num, to: num, input: num, size: int) :: num:
+	return {_from}+(((({_to}-{_from})/({_size}))*({_input}-1))+(((({_to}-{_from})/({_size}))*({_input}-1))/{_size})) if {_input} != {_size} else {_to}
+
+# Just a command to try out rainbows:
+# Remove the hashtags to use it!
+
+#command rainbow <text> [<num>] [<int>]:
+#	usage: /rainbow <text> <brightness [0-2]> <wrapAmount>
+#	permission: command.rainbow
+#	trigger:
+#		send formatted rainbow(arg-1, arg-2, arg-3)

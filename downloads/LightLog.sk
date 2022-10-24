@@ -1,0 +1,61 @@
+options:
+	prefix: &eLightLog &7|
+	countDownTime: 12 # in seconds
+	disabledCommands: "spawn" # and "command2" and "command3" - use "all" to disable every command
+	killPlayerOnLog: true
+	bypassPermission: combatlog.bypass
+	spreadItems: true # the items won't drop at the player, but rather randomly around the player when they log out
+	spreadRange: 5 # in blocks, only does anything if spreadItems is true
+
+on command:
+	if {combatlog::log::*} contains player:
+		if {@disabledCommands} is not "all":
+			if {@disabledCommands} contains command:
+				cancel event
+				send "&cYou can't execute that command while in combat!"
+		else:
+			cancel event
+			send "&cYou can't execute any commands while in combat!"
+
+on damage:
+	attacker is player
+	attacker doesn't have permission "{@bypassPermission}"
+	victim is player
+
+	add attacker to {combatlog::log::*} if {combatlog::log::*} doesn't contain attacker
+	add victim to {combatlog::log::*} if {combatlog::log::*} doesn't contain victim
+	set {combatlog::timer::%attacker%} to {@countDownTime}+1
+	set {combatlog::timer::%victim%} to {@countDownTime}+1
+	loop 12 times:
+		set {_time} to 12-((loop-value)-1)
+		clear {_log::*}
+		add victim to {_log::*} if {combatlog::timer::%attacker%} = {_time}+1
+		add attacker to {_log::*} if {combatlog::timer::%attacker%} = {_time}+1
+		if {_log::*} is set:
+			loop {_log::*}:
+				if loop-value-2 is online:
+					send action bar "{@prefix} You have %{_time}% seconds left of combat!" to loop-value-2
+					remove 1 from {combatlog::timer::%loop-value-2%}
+				else:
+					remove loop-value-2 from {combatlog::log::*}
+					delete {combatlog::timer::%loop-value-2%}
+					stop
+			wait 1 second
+		else:
+			stop
+	loop {_log::*}:
+		send action bar "{@prefix} You are no longer in combat!" to loop-value
+		remove loop-value from {combatlog::log::*}
+		delete {combatlog::timer::%loop-value%}
+	
+
+on disconnect:
+	if {combatlog::log::*} contains player:
+		if {@killPlayerOnLog} is true:
+			loop all items in player's inventory:
+				if {@spreadItems} is true:
+					drop loop-value at location of random element of all blocks in radius 5 of player
+				else:
+					drop loop-value at player
+			clear player's inventory
+		remove player from {combatlog::log::*}

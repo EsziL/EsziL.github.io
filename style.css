@@ -1,0 +1,306 @@
+.navigation {
+	overflow: hidden;
+	background-color: #00000044;
+	display: flex;
+	flex-direction: row-reverse;
+	align-items: flex-start;
+	justify-content: flex-start;
+}
+
+
+.navigation a {
+	color: #f2f2f2;
+	text-align: center;
+	padding: 14px 16px;
+	text-decoration: none;
+	font-size: 17px;
+	cursor: pointer;
+	font-family: 'Rubik';
+	transition: background-color 0.15s, color 0.15s;
+}
+
+.logo a {
+	cursor: pointer;
+}
+
+.logo img {
+	position: absolute;
+	width: 6em;
+	height: 3em;
+	left: 30px;
+}
+
+.navigation a:hover {
+	background-color: #ddd;
+	color: black;
+  }
+  
+.navigation a.active {
+	background-color: #04AA6D;
+	color: white;
+}
+
+body {
+	background-color: #2e2e2e;
+	margin: 0;
+}
+
+
+.welcome {
+	height: 50vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+}
+
+#w1 {
+	color: #7f53ad;
+	font-family: 'Oswald';
+	position: relative;
+	text-shadow: 2px 2px black;
+	letter-spacing: 1px;
+	font-size: 80px;
+	text-align: center;
+}
+
+#w2 {
+	position: relative;
+	color: lightgray;
+	font-family: 'Comfortaa';
+	text-shadow: 1px 1px black;
+	font-size: 20px;
+	top: -10px;
+}
+
+html, body {
+	height: 100%;
+}
+
+.box {
+	display: flex;
+	flex-wrap: wrap;
+	row-gap: 10px;
+	column-gap: 10px;
+	margin: 50px;
+}
+
+
+#script {
+	border: 2px solid gray;
+	width: 350px;
+	height: 175px;
+	border-radius: 10px;
+	transition: transform .2s;
+}
+
+#script:hover {
+	transform: scale(1.05);
+}
+
+#scriptname {
+	color: aquamarine;
+	text-align: center;
+	font-family: 'Comfortaa';
+	text-decoration: underline;
+	cursor: pointer;
+}
+
+#scriptbutton {
+	color: white;
+	text-align: center;
+	background-color: transparent;
+	border: none;
+	outline: none;
+	position: relative;
+	top: 22%;
+	left: 83%;
+	font-family: 'Comfortaa';
+	font-size: 40px;
+	border-radius: 25px;
+	width: 46px;
+	cursor: pointer;
+}
+
+#scriptbutton:hover {
+	color: aqua;
+}
+
+#scriptdescription {
+	color: gray;
+	font-weight: lighter;
+	font-family: 'Rubik';
+	text-align: left;
+	position: relative;
+	left: 20px;
+	top: -95px;
+}
+
+a {
+	all: unset;
+}
+
+#scriptbox {
+	position: relative;
+	height: 90%;
+	width: 93%;
+	left: 20px;
+	margin: 30px;
+	border: 1px solid gray;
+	border-radius: 20px;
+}
+
+#scriptname-2 {
+	color: aquamarine;
+	left: 10px;
+	position: relative;
+	font-family: 'Comfortaa';
+	font-size: 50px;
+}
+
+#script-desc-text {
+	color: gray;
+	position: relative;
+	left: 25px;
+	top: -20px;
+	font-weight: lighter;
+	font-family: 'Rubik';
+}
+
+#script-desc {
+	color: gray;
+	left: 50px;
+	position: relative;
+	top: -30px;
+	font-weight: lighter;
+	font-family: 'Rubik';
+}
+
+#script-download-text {
+	color: gray;
+	left: 25px;
+	top: 100px;
+	font-weight: lighter;
+	font-family: 'Rubik';
+	font-size: 35px;
+	position: relative;
+}
+
+
+#script-download {
+	color: aqua;
+	font-family: 'Comfortaa';
+	font-weight: lighter;
+	text-decoration: underline;
+	position: relative;
+	top: 100px;
+	left: 75px;
+	cursor: pointer;
+}
+
+::-webkit-scrollbar {
+	width: 15px;
+}
+
+::-webkit-scrollbar-track {
+	background: #223; 
+}
+ 
+::-webkit-scrollbar-thumb {
+	background: #444; 
+}
+::-webkit-scrollbar-thumb:hover {
+	background: #333; 
+}
+
+::-webkit-scrollbar-corner {
+	background: transparent;
+}
+
+.aboutme {
+	position: relative;
+	top: 252px;
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+	flex-direction: column;
+	width: 100%;
+	background-color: #00000044;
+	margin: 0;
+	padding: 0 0;
+}
+
+.aboutme h1 {
+	font-size: 70px;
+	font-family: 'Comfortaa';
+	color: #7f53ad;
+	text-shadow: 2px 2px black;
+}
+
+.aboutme h2 {
+	color: lightgray;
+	font-family: 'Rubik';
+	font-size: 20px;
+	text-align: center;
+	padding: 50px 0px;
+	position: relative;
+	top: -50px;
+}
+
+.social {
+	position: fixed;
+	top: 60px;
+	left: -6px;
+	display: flex;
+	flex-direction: column;
+	flex-wrap: wrap;
+}
+
+.social-discord img {
+	width: 6em;
+	height: 3.4em;
+	filter: grayscale(1);
+	z-index: 0;
+	transition: filter .3s, transform .3s;
+}
+
+.social-discord div {
+	background-color: transparent;
+	height: 3.4em;
+	width: 3.4em;
+	position: absolute;
+	border-radius: 100px;
+	z-index: 1;
+	left: 20px;
+	top: 0px;
+}
+
+.social-discord h4 {
+	font-size: 12px;
+	color: white;
+	font-family: 'Rubik';
+	background-color: #59b051;
+	border-radius: 5px;
+	position: absolute;
+	padding: 6px 8px;
+	top: 0px;
+	left: 85px;
+	opacity: 0;
+	transition: opacity .5s;
+}
+
+.credit {
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+	flex-direction: column;
+	width: 100%;
+	position: relative;
+	top: 500px;
+}
+
+.credit h4 {
+	color: white;
+	font-family: 'Rubik';
+	letter-spacing: 1px;
+}
