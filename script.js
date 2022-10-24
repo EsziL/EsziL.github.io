@@ -37,6 +37,9 @@ function SocialLoop() {
 	if (scrollTop >= 0 && scrollTop <= 52) {
 		container.style.top = `${60-scrollTop}px`;
 	}
+	else if (scrollTop > 52) {
+		container.style.top = '8px';
+	}
 
 	setTimeout(again, 10)
 
