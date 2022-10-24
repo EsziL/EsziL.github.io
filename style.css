@@ -99,7 +99,7 @@ html, body {
 }
 
 #scriptname {
-	color: aquamarine;
+	color: #b561ff;
 	text-align: center;
 	font-family: 'Comfortaa';
 	text-decoration: underline;
@@ -151,7 +151,7 @@ a {
 }
 
 #scriptname-2 {
-	color: aquamarine;
+	color: #b561ff;
 	left: 10px;
 	position: relative;
 	font-family: 'Comfortaa';
@@ -188,7 +188,7 @@ a {
 
 
 #script-download {
-	color: aqua;
+	color: #d19cff;
 	font-family: 'Comfortaa';
 	font-weight: lighter;
 	text-decoration: underline;
